@@ -4,12 +4,20 @@ setwd(wd)
 fileName = "tmp.zip"
 csvFile = "household_power_consumption.txt"
 
-#download the file
-download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip",destfile = fileName) 
-unzip(fileName)
-
-# read all file
-allData = read.csv2(csvFile, header = TRUE, stringsAsFactors = FALSE)
+if (!exists("allData")){
+        
+        #download the file
+        if(!file.exists(fileName)){
+                download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip",destfile = fileName) 
+        }
+        
+        if(!file.exists(csvFile)){
+                unzip(fileName)
+        }
+        
+        # read all file
+        allData = read.csv2(csvFile, header = TRUE, stringsAsFactors = FALSE)
+}
 
 #get required subset
 data = subset(allData, allData$Date == "1/2/2007" | allData$Date == "2/2/2007")

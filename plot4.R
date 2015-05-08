@@ -20,3 +20,5 @@ with(data, lines(DateTime, Global_reactive_power))
 #save to the file
 dev.copy(png, "plot4.png")
 dev.off()
+
+par(mfcol=c(1,1))
